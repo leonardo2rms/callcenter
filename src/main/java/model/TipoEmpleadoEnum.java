@@ -1,7 +1,9 @@
+package model;
+
 /**
  * Enum que representa los diferentes tipos de empleados que existen en el callcenter
  */
-enum TipoEmpleadoEnum {
+public enum TipoEmpleadoEnum {
     OPERATOR(1, "Operador"),
     SUPERVISOR(2, "Supervisor"),
     DIRECTOR(3, "Director");

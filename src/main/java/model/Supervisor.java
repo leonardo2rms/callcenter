@@ -1,3 +1,5 @@
+package model;
+
 /**
  * Clase que representa a un empleado del tipo Supervisor
  *

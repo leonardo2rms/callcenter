@@ -1,3 +1,7 @@
+package model;
+
+import java.util.Objects;
+
 /**
  * Clase que representa al empleado del call center
  * @author leonardo
@@ -29,5 +33,28 @@ public class Empleado {
 
     public void setTipoEmpleado(TipoEmpleadoEnum tipoEmpleado) {
         this.tipoEmpleado = tipoEmpleado;
+    }
+
+    @Override
+    public String toString() {
+        return "Empleado{" +
+                "nombre='" + nombre + '\'' +
+                ", tipoEmpleado=" + tipoEmpleado +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Empleado empleado = (Empleado) o;
+        return Objects.equals(nombre, empleado.nombre) &&
+                tipoEmpleado == empleado.tipoEmpleado;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(nombre, tipoEmpleado);
     }
 }
