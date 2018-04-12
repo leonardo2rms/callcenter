@@ -4,9 +4,13 @@ package model;
  * Clase que representa una llamada telefonica
  * @author leonardo
  */
-public class Llamada {
+public class Llamada{
     private int id;
     private Empleado empleadoAsignado;
+
+    public Llamada(int id) {
+        this.id = id;
+    }
 
     public int getId() {
         return id;
@@ -23,4 +27,5 @@ public class Llamada {
     public void setEmpleadoAsignado(Empleado empleadoAsignado) {
         this.empleadoAsignado = empleadoAsignado;
     }
+
 }
