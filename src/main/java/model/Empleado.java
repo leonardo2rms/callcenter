@@ -19,6 +19,7 @@ public class Empleado implements Comparable<Empleado>{
      */
     public Empleado(TipoEmpleadoEnum tipoEmpleado) {
         this.tipoEmpleado = tipoEmpleado;
+        this.nombre = "Unnamed";
     }
 
     public String getNombre() {

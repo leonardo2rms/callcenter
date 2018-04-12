@@ -1,37 +1,32 @@
 package service;
 
 import model.Llamada;
+import org.apache.log4j.Logger;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ProductorLlamada implements Runnable {
+    private static Logger log = Logger.getLogger(ProductorLlamada.class.getName());
+
     private BlockingQueue<Llamada> llamadas;
-    private BlockingQueue<Llamada> llamadasEnEspera;
     private final int totalLlamadas;
 
-    public ProductorLlamada(int totalLlamadas, int cantidadLlamadasSimultaneas, int maximoLlamadasEnEspera) {
+    public ProductorLlamada(int totalLlamadas, int cantidadLlamadasSimultaneas) {
         this.totalLlamadas = totalLlamadas;
         llamadas = new LinkedBlockingQueue<>(cantidadLlamadasSimultaneas);
-        llamadasEnEspera = new LinkedBlockingQueue<>(maximoLlamadasEnEspera);
     }
 
     @Override
     public void run() {
         try {
             for (int i = 1; i <= totalLlamadas; i++) {
-
-                System.out.println("Produciendo llamada " + i);
-                llamadas.put(new Llamada(i));
+                    llamadas.put(new Llamada(i));
+                    log.info("Se agrego la llamada " + i + " a la lista de llamadas");
             }
-            //TODO falta el posion pill
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("Error en: " + Thread.currentThread().getName() + ": " + e.toString());
         }
-    }
-
-    public BlockingQueue<Llamada> getLlamadasEnEspera() {
-        return llamadasEnEspera;
     }
 
     public BlockingQueue<Llamada> getLlamadas() {
