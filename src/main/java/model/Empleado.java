@@ -1,15 +1,22 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Clase que representa al empleado del call center
  *
  * @author leonardo
  */
-public class Empleado implements Comparable<Empleado>{
+public class Empleado implements Comparable<Empleado> {
 
-    private String nombre;
+    private static final AtomicInteger count = new AtomicInteger(0);
+
+    private int id;
     private TipoEmpleadoEnum tipoEmpleado;
 
     /**
@@ -19,15 +26,7 @@ public class Empleado implements Comparable<Empleado>{
      */
     public Empleado(TipoEmpleadoEnum tipoEmpleado) {
         this.tipoEmpleado = tipoEmpleado;
-        this.nombre = "Unnamed";
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.id = count.incrementAndGet();
     }
 
     public TipoEmpleadoEnum getTipoEmpleado() {
@@ -40,7 +39,7 @@ public class Empleado implements Comparable<Empleado>{
 
     @Override
     public String toString() {
-        return nombre + "-" + tipoEmpleado.getDescripcion();
+        return id + "-" + tipoEmpleado.getDescripcion();
     }
 
     @Override
@@ -61,4 +60,35 @@ public class Empleado implements Comparable<Empleado>{
     public int compareTo(Empleado o) {
         return this.tipoEmpleado.compareTo(o.tipoEmpleado);
     }
+
+    /**
+     * Metodo encargado de generar una cantidad de empleados por tipo
+     *
+     * @param tipoEmpleado el tipo de empleado
+     * @param cantidad     la cantidad que se quieren generar
+     * @return una lista de empleados del tipo pasado por parametros
+     */
+    public static List<Empleado> generarEmpleadosPorTipo(TipoEmpleadoEnum tipoEmpleado, int cantidad) {
+        List<Empleado> empleados = new ArrayList<>();
+        for (int i = 0; i < cantidad; i++) {
+            empleados.add(new Empleado(tipoEmpleado));
+        }
+        return empleados;
+    }
+
+    /**
+     * Se contesta la llamada y se le asigna el tiempo de duracion
+     *
+     * @param llamada la llamada a ser atendida
+     * @throws InterruptedException si se inturrumpe antes de terminar la llamada
+     */
+    public void constestarLlamada(Llamada llamada) throws InterruptedException {
+        llamada.setDuracion(getCallTime());
+        TimeUnit.SECONDS.sleep(llamada.getDuracion());
+    }
+
+    private static Integer getCallTime() {
+        return new Random().nextInt((10 - 5) + 1) + 5;
+    }
+
 }

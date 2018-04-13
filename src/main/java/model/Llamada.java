@@ -1,15 +1,27 @@
 package model;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Clase que representa una llamada telefonica
  * @author leonardo
  */
 public class Llamada{
+    private static final AtomicInteger count = new AtomicInteger(0);
+
     private int id;
     private Empleado empleadoAsignado;
+    private int duracion;
 
-    public Llamada(int id) {
-        this.id = id;
+    public Llamada() {
+        this.id = count.incrementAndGet();
+    }
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
     }
 
     public int getId() {
