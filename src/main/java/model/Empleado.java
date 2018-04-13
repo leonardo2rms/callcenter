@@ -1,9 +1,10 @@
 package model;
 
+import general.Util;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -39,7 +40,7 @@ public class Empleado implements Comparable<Empleado> {
 
     @Override
     public String toString() {
-        return id + "-" + tipoEmpleado.getDescripcion();
+        return id + " - " + tipoEmpleado.getDescripcion();
     }
 
     @Override
@@ -83,12 +84,10 @@ public class Empleado implements Comparable<Empleado> {
      * @throws InterruptedException si se inturrumpe antes de terminar la llamada
      */
     public void constestarLlamada(Llamada llamada) throws InterruptedException {
-        llamada.setDuracion(getCallTime());
+        llamada.setDuracion(Util.getTiempoLlamada());
         TimeUnit.SECONDS.sleep(llamada.getDuracion());
     }
 
-    private static Integer getCallTime() {
-        return new Random().nextInt((10 - 5) + 1) + 5;
-    }
+
 
 }

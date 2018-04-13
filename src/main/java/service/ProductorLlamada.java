@@ -6,6 +6,7 @@ import service.impl.DispatcherImpl;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Clase encargada de producir llamadas
@@ -36,11 +37,33 @@ public class ProductorLlamada {
      * Utiliza el executorService para hacer la cantidad de llamadas indicadas en el constructor de la clase
      */
     public void run() {
-        executorService.execute(() -> {
+        this.executorService.execute(() -> {
             for (int i = 0; i < this.totalLlamadasParaProducir; i++) {
                 dispatcher.dispatchCall(new Llamada());
             }
         });
+    }
+
+    /**
+     * Verifica si el ExecutorService sigue trabajando
+     * @return booleano indicando true si el executorService no ha terminado, false si ya termino.
+     */
+    public Boolean isRunning(){
+        return !this.executorService.isTerminated();
+    }
+
+    /**
+     * Metodo encargado de apagar el Executorservice
+     */
+    public void killExecutor(){
+        this.executorService.shutdown();
+        try {
+            if (!this.executorService.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                this.executorService.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            this.executorService.shutdownNow();
+        }
     }
 
 }
