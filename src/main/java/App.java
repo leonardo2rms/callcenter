@@ -21,9 +21,21 @@ public class App {
         empleados.addAll(Empleado.generarEmpleadosPorTipo(TipoEmpleadoEnum.SUPERVISOR, Constantes.TOTAL_SUPERVISORES));
         empleados.addAll(Empleado.generarEmpleadosPorTipo(TipoEmpleadoEnum.DIRECTOR, Constantes.TOTAL_DIRECTORES));
 
+        /* Inicializar el Dispatcher*/
         DispatcherImpl dispatcher = new DispatcherImpl(empleados, Constantes.MAXIMO_LLAMADAS_SIMULTANEAS);
+
+        /* Inicializar el ProductorLlamada */
         ProductorLlamada producer = new ProductorLlamada(Constantes.TOTAL_LLAMADAS_PRODUCER, Constantes.MAXIMO_LLAMADAS_SIMULTANEAS, dispatcher);
+
+        /* Comenzar a producir llamadas */
         producer.run();
+
+        /* Detener el Executor service del ProductorLlamada */
+        producer.killExecutor(Constantes.TIEMPO_ESPERA_KILL_EXECUTOR);
+
+        /* Detener el Executor service del Dispatcher */
+        dispatcher.killExecutor(Constantes.TIEMPO_ESPERA_KILL_EXECUTOR);
+
 
     }
 }

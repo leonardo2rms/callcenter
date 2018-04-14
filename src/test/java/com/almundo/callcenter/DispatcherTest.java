@@ -2,18 +2,23 @@ package com.almundo.callcenter;
 
 import general.Constantes;
 import model.Empleado;
+import model.Llamada;
 import model.TipoEmpleadoEnum;
 import org.junit.Before;
 import org.junit.Test;
-import service.ProductorLlamada;
+import service.Dispatcher;
 import service.impl.DispatcherImpl;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class DispatcherImplTest {
+/**
+ * Clase Test del Dispatcher
+ */
+public class DispatcherTest {
 
-    private ProductorLlamada producer;
-    private DispatcherImpl dispatcher;
+    private Dispatcher dispatcher;
     private List<Empleado> empleados;
 
     @Before
@@ -23,14 +28,22 @@ public class DispatcherImplTest {
         this.empleados.addAll(Empleado.generarEmpleadosPorTipo(TipoEmpleadoEnum.DIRECTOR, Constantes.TOTAL_DIRECTORES));
 
         this.dispatcher = new DispatcherImpl(this.empleados, Constantes.MAXIMO_LLAMADAS_SIMULTANEAS);
-        this.producer = new ProductorLlamada(Constantes.TOTAL_LLAMADAS_PRODUCER, Constantes.MAXIMO_LLAMADAS_SIMULTANEAS, this.dispatcher);
     }
 
+    /**
+     * Test de 10 llamadas concurrentes solicitado en el enunciado
+     */
     @Test
-    public void shouldMakeOneHundredCallsWithTenSimultaneoslyCalls() {
+    public void shouldMakeTenCalls() {
+        Collection<Llamada> llamadas = new ArrayList<>();
+        for (int i = 0; i < 11; i++) {
+            llamadas.add(new Llamada());
+        }
+        llamadas.parallelStream()
+                .forEach(dispatcher::dispatchCall);
 
-        this.producer = new ProductorLlamada(100, 10, this.dispatcher);
-        this.producer.run();
+        this.dispatcher.killExecutor(20);
     }
+
 
 }
