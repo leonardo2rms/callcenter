@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Empleado implements Comparable<Empleado> {
 
-    private static final AtomicInteger count = new AtomicInteger(0);
+    public static final AtomicInteger count = new AtomicInteger(0);
 
     private int id;
     private TipoEmpleadoEnum tipoEmpleado;
@@ -28,6 +28,10 @@ public class Empleado implements Comparable<Empleado> {
     public Empleado(TipoEmpleadoEnum tipoEmpleado) {
         this.tipoEmpleado = tipoEmpleado;
         this.id = count.incrementAndGet();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public TipoEmpleadoEnum getTipoEmpleado() {
