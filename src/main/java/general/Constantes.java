@@ -9,6 +9,6 @@ public class Constantes {
     public static final int TOTAL_DIRECTORES = 1;
     public static final int DURACION_MINIMA_LLAMADA = 5;
     public static final int DURACION_MAXIMA_LLAMADA = 10;
-    public static final int TIEMPO_ESPERA_KILL_EXECUTOR = 12;
+    public static final int TIEMPO_ESPERA_KILL_EXECUTOR = 30;
 
 }

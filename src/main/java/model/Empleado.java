@@ -1,5 +1,6 @@
 package model;
 
+import general.Constantes;
 import general.Util;
 
 import java.util.ArrayList;
@@ -88,7 +89,7 @@ public class Empleado implements Comparable<Empleado> {
      * @throws InterruptedException si se inturrumpe antes de terminar la llamada
      */
     public void constestarLlamada(Llamada llamada) throws InterruptedException {
-        llamada.setDuracion(Util.getTiempoLlamada());
+        llamada.setDuracion(Util.getTiempoLlamada(Constantes.DURACION_MINIMA_LLAMADA, Constantes.DURACION_MAXIMA_LLAMADA));
         TimeUnit.SECONDS.sleep(llamada.getDuracion());
     }
 

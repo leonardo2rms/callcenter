@@ -14,7 +14,7 @@ public class Util {
      *
      * @return duracion de la llamada
      */
-    public static Integer getTiempoLlamada() {
-        return new Random().nextInt((Constantes.DURACION_MAXIMA_LLAMADA - Constantes.DURACION_MINIMA_LLAMADA) + 1) + Constantes.DURACION_MINIMA_LLAMADA;
+    public static Integer getTiempoLlamada(Integer duracionMinima, Integer duracionMaxima) {
+        return new Random().nextInt((duracionMaxima - duracionMinima) + 1) + duracionMinima;
     }
 }

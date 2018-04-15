@@ -1,13 +1,15 @@
-package service;
+package service.impl;
 
 import model.Llamada;
 import org.apache.log4j.Logger;
+import service.Dispatcher;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 /**
  * Clase encargada de producir llamadas
@@ -35,13 +37,13 @@ public class ProductorLlamada {
     }
 
     /**
-     * Utiliza el executorService para hacer la cantidad de llamadas indicadas en el constructor de la clase
+     * Utiliza el executorService para hacer la cantidad de llamadas indicadas en el constructor de la clase.
      */
     public void run() {
-        this.executorService.execute(() -> {
-            final Collection<Llamada> llamadas = obtenerLlamadas(totalLlamadasParaProducir);
-            llamadas.stream()
-                    .forEach(dispatcher::dispatchCall);
+        IntStream.range(0, this.totalLlamadasParaProducir).forEach(i -> {
+            this.executorService.execute(() -> {
+                dispatcher.dispatchCall(new Llamada());
+            });
         });
     }
 
@@ -71,7 +73,7 @@ public class ProductorLlamada {
                 this.executorService.shutdownNow();
             }
         } catch (InterruptedException e) {
-                this.executorService.shutdownNow();
+            this.executorService.shutdownNow();
         }
     }
 
