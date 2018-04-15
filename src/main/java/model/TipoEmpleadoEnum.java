@@ -2,6 +2,8 @@ package model;
 
 /**
  * Enum que representa los diferentes tipos de empleados que existen en el callcenter
+ *
+ * @author Leonardo
  */
 public enum TipoEmpleadoEnum {
     OPERADOR(1, "Operador"),

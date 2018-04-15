@@ -4,18 +4,22 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Clase que representa una llamada telefonica
+ *
  * @author leonardo
  */
-public class Llamada{
-    private static final AtomicInteger count = new AtomicInteger(0);
+public class Llamada {
+    public static final AtomicInteger count = new AtomicInteger(0);
 
     private int id;
     private Empleado empleadoAsignado;
     private int duracion;
-
+    /**
+     * Constructor que crea un objeto un con id autoincrementado
+     */
     public Llamada() {
         this.id = count.incrementAndGet();
     }
+
     public int getDuracion() {
         return duracion;
     }
@@ -26,10 +30,6 @@ public class Llamada{
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Empleado getEmpleadoAsignado() {

@@ -17,17 +17,17 @@ import java.util.concurrent.TimeUnit;
  * @author Leonardo
  */
 public class DispatcherImpl implements Dispatcher {
-    static Logger log = Logger.getLogger(Dispatcher.class.getName());
+    private static Logger log = Logger.getLogger(Dispatcher.class.getName());
 
-    final ExecutorService executorService;
-    final PriorityBlockingQueue<Empleado> colaEmpleados;
+    private final ExecutorService executorService;
+    private final PriorityBlockingQueue<Empleado> colaEmpleados;
 
     /**
      * Genera el Dispatcher con una cola de empleados indicado por parametros y una capacidad para manejar
      * el numero de llamadas simultaneas enviado por parametro
      *
-     * @param empleados
-     * @param cantidadLlamadasSimultaneas
+     * @param empleados                   lista de los empleados que atenderan las llamadas
+     * @param cantidadLlamadasSimultaneas cantidad de llamadas que seran atendidas concurrentemente
      */
     public DispatcherImpl(List<Empleado> empleados, int cantidadLlamadasSimultaneas) {
         this.executorService = Executors.newFixedThreadPool(cantidadLlamadasSimultaneas);
@@ -38,12 +38,12 @@ public class DispatcherImpl implements Dispatcher {
     public void dispatchCall(Llamada llamada) {
         this.executorService.execute(() -> {
             try {
-                log.info("Llamada " + llamada.getId() + " recibida, en breve sera atendida.");
                 Empleado empleado = colaEmpleados.take();
+                log.info("Llamada " + llamada.getId() + " recibida, en breve sera atendida.");
                 llamada.setEmpleadoAsignado(empleado);
                 log.info("Llamada " + llamada.getId() + " Atendida por el empleado: " + empleado.toString());
                 empleado.constestarLlamada(llamada);
-                log.info("Llamada " + llamada.getId() + " terminada, duracion: " + llamada.getDuracion() + " segundos," + " el empleado " + empleado.toString() + " se desocupo");
+                log.info("Llamada " + llamada.getId() + " terminada, duracion: " + llamada.getDuracion() + " segundos," + " el empleado " + llamada.getEmpleadoAsignado().toString() + " se desocupo");
                 colaEmpleados.put(empleado);
             } catch (InterruptedException e) {
                 log.error("Se ha interrumpido la llamada: " + llamada.getId());

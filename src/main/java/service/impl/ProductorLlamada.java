@@ -1,7 +1,6 @@
 package service.impl;
 
 import model.Llamada;
-import org.apache.log4j.Logger;
 import service.Dispatcher;
 
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ import java.util.stream.IntStream;
  * @author Leonardo
  */
 public class ProductorLlamada {
-    private static Logger log = Logger.getLogger(ProductorLlamada.class.getName());
     private final int totalLlamadasParaProducir;
     private final ExecutorService executorService;
     private Dispatcher dispatcher;
@@ -40,10 +38,8 @@ public class ProductorLlamada {
      * Utiliza el executorService para hacer la cantidad de llamadas indicadas en el constructor de la clase.
      */
     public void run() {
-        IntStream.range(0, this.totalLlamadasParaProducir).forEach(i -> {
-            this.executorService.execute(() -> {
-                dispatcher.dispatchCall(new Llamada());
-            });
+        obtenerLlamadas(totalLlamadasParaProducir).stream().forEach(llamada -> {
+            this.executorService.execute(() -> dispatcher.dispatchCall(llamada));
         });
     }
 
@@ -55,9 +51,9 @@ public class ProductorLlamada {
      */
     private Collection<Llamada> obtenerLlamadas(int totalLlamadasParaProducir) {
         Collection<Llamada> llamadas = new ArrayList<>();
-        for (int i = 0; i < totalLlamadasParaProducir; i++) {
+        IntStream.range(0, totalLlamadasParaProducir).forEach(i -> {
             llamadas.add(new Llamada());
-        }
+        });
         return llamadas;
     }
 

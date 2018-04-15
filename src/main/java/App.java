@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * Clase principal de la aplicacion, contiene el metodo main
+ *
+ * @author Leonardo
  */
 public class App {
 
@@ -25,7 +27,7 @@ public class App {
         DispatcherImpl dispatcher = new DispatcherImpl(empleados, Constantes.MAXIMO_LLAMADAS_SIMULTANEAS);
 
         /* Inicializar el ProductorLlamada */
-        ProductorLlamada producer = new ProductorLlamada(Constantes.TOTAL_LLAMADAS_PRODUCER, Constantes.MAXIMO_LLAMADAS_SIMULTANEAS, dispatcher);
+        ProductorLlamada producer = new ProductorLlamada(Constantes.TOTAL_LLAMADAS_PRODUCER, Constantes.MAXIMO_LLAMADAS_SIMULTANEAS_PRODUCTOR, dispatcher);
 
         /* Comenzar a producir llamadas */
         producer.run();

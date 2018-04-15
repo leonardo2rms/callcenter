@@ -10,6 +10,8 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * Test de la clase Util
+ *
+ * @author Leonardo
  */
 public class UtilTest {
 
@@ -21,9 +23,9 @@ public class UtilTest {
 
     @Test
     public void testRandomBetwenValues() {
-        int tiempoMinimo= 5;
-        int tiempoMaximo= 10;
-        IntStream.range(0,5).forEach(i -> {
+        int tiempoMinimo = 5;
+        int tiempoMaximo = 10;
+        IntStream.range(0, 5).forEach(i -> {
             int tiempoLlamada = Util.getTiempoLlamada(tiempoMinimo, tiempoMaximo);
             assertTrue(tiempoLlamada >= tiempoMinimo && tiempoLlamada <= tiempoMaximo);
         });
