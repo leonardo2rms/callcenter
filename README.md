@@ -68,3 +68,21 @@ más de 10 llamadas concurrentes.
 De ser necesario, anexar un documento con la explicación del cómo
 y porqué resolvió los puntos extras, o comentarlo en las clases
 donde se encuentran sus tests unitarios respectivos.
+
+
+
+## Agradecimientos:
+
+Siempre que tenemos una duda la buscamos en Google, conseguimos a alguien que ya había tenido el mismo inconveniente y se tomó de su tiempo para resolverlo y compartirlo en algún blog o foro, aplicamos su solución en nuestros desarrollos y luego nos olvidamos de agradecer, me pasa y nos pasa a todos a diario, por eso siempre que me acuerdo intento de agradecer, mis agradecimientos van para estas publicaciones y sus autores:
+
+- http://www.baeldung.com/java-executor-service-tutorial
+- http://winterbe.com/posts/2015/04/07/java8-concurrency-tutorial-thread-executor-examples/
+- http://www.baeldung.com/java-priority-blocking-queue
+- http://www.baeldung.com/java-blocking-queue
+- http://www.vogella.com/tutorials/JavaConcurrency/article.html
+- https://www.javaworld.com/article/2078809/java-concurrency/java-concurrency-java-101-the-next-generation-java-concurrency-without-the-pain-part-1.html
+- https://www.youtube.com/watch?v=coK4jM5wvko&list=PLU8oAlHdN5BktAXdEVCLUYzvDyqRQJ2lk
+- https://www.youtube.com/watch?v=KapFKr1K8-U&t=178s
+- https://www.youtube.com/watch?v=AVh_udI27K0
+- https://www.youtube.com/watch?v=ytpYIzc9_zU&t=8s
+- https://www.youtube.com/watch?v=EtJALCEIxDs
