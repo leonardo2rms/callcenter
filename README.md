@@ -59,7 +59,7 @@ más de 10 llamadas concurrentes.
     llamadas al mismo tiempo, el executor sea el encargado de ver cuando se desocupa un `Thread` para asignarle la tarea, la solución fue dejar
     la llamada en espera mientras se desocupa un `Tread`.
 - [x] Agregar los tests unitarios que se crean convenientes.
-    * Se agregaron los Test en el paquete: callcenter/src/test/java/com/almundo/callcenter
+    * Se agregaron los Tests en el paquete: callcenter/src/test/java/com/almundo/callcenter y se pueden correr todos al ejecutar la clase AllTests.java
 - [x] Agregar documentación de código.
 
 ### Tener en Cuenta:
