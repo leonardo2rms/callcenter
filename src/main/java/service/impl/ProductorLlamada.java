@@ -1,5 +1,6 @@
 package service.impl;
 
+import general.Constantes;
 import model.Llamada;
 import service.Dispatcher;
 
@@ -38,8 +39,16 @@ public class ProductorLlamada {
      * Utiliza el executorService para hacer la cantidad de llamadas indicadas en el constructor de la clase.
      */
     public void run() {
-        obtenerLlamadas(totalLlamadasParaProducir).stream().forEach(llamada -> {
-            this.executorService.execute(() -> dispatcher.dispatchCall(llamada));
+        obtenerLlamadas(totalLlamadasParaProducir).forEach(llamada -> {
+            try {
+                /*Se agrego este delay para que se presenciara el uso del priorityBlockingQueue de los empleados.
+                  en el log no se veia que las llamadas estaban siendo atendidas por los operadores, luego los
+                  supervisores y luego los directores, como se recibian tan rapidamente no se apreciaba el orden. */
+                TimeUnit.MILLISECONDS.sleep(Constantes.DELAY_LLAMADA_PRODUCTOR);
+                this.executorService.execute(() -> dispatcher.dispatchCall(llamada));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         });
     }
 
